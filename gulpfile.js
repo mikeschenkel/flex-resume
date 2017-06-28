@@ -9,6 +9,7 @@ var pdf = require('gulp-html-pdf');
 var rename = require('gulp-rename');
 var requireUncached = require('require-uncached');
 var watch = require('gulp-watch');
+var path = require('path');
 
 // configure input, output and processors
 
@@ -17,7 +18,7 @@ var inputData = 'resume.json';
 var inputFilename = 'resume.handlebars';
 var outputDir = './dist/';
 var outputFilename = 'resume.pdf';
-var basePath = 'file://{path-to-your-json-resume-folder}/dist/';
+var basePath = path.join(__dirname, '/dist/');
 
 // process input and write output to disk
 
