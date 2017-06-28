@@ -1,6 +1,7 @@
 // include depenencies (a-z)
 
 var browserSync = require('browser-sync');
+var config = require('./config.json');
 var data = require('gulp-data');
 var gulp = require('gulp');
 var handlebars = require('gulp-compile-handlebars');
@@ -13,12 +14,12 @@ var watch = require('gulp-watch');
 
 // configure input, output and processors
 
-var inputDir = './src/';
-var inputData = 'resume.json';
-var inputFilename = 'resume.handlebars';
-var outputDir = './dist/';
-var outputFilename = 'resume.pdf';
-var basePath = path.join('file://', __dirname, '/dist/');
+var inputDir = './' + config.inputDir;
+var inputData = config.inputData;
+var inputFilename = config.inputFilename;
+var outputDir = './' + config.outputDir;
+var outputFilename = config.outputFilename;
+var basePath = path.join('file://', __dirname, config.outputDir);
 
 // process input and write output to disk
 

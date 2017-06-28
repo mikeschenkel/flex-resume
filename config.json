@@ -1,0 +1,7 @@
+{
+  "inputDir": "src/",
+  "inputData": "resume.json",
+  "inputFilename": "resume.handlebars",
+  "outputDir": "dist/",
+  "outputFilename": "resume.pdf"
+}
