@@ -5,7 +5,6 @@ var del = require('del');
 var gulp = require('gulp');
 var handlebars = require('gulp-compile-handlebars');
 var htmlmin = require('gulp-htmlmin');
-var path = require('path');
 var pdf = require('gulp-html-pdf');
 var rename = require('gulp-rename');
 var requireUncached = require('require-uncached');
@@ -17,15 +16,11 @@ var config = require('./config.js');
 var paths = config.paths;
 var settings = config.settings;
 
-var inputDir = path.join(__dirname, paths.src);
-var inputData = inputDir + settings.data;
-var inputFilename = inputDir + settings.inputFilename;
-
 // Process input and write output to disk
 gulp.task('handlebars', function () {
-  return gulp.src(inputFilename)
+  return gulp.src(paths.inputFilename)
     .pipe(data(function() {
-      return requireUncached(inputData);
+      return requireUncached(paths.inputData);
     }))
     .pipe(handlebars(null, config.handlebars))
     .pipe(htmlmin(config.htmlmin))

@@ -1,4 +1,5 @@
 var settings = {
+  theme: 'blank',
   data: 'resume.json',
   inputFilename: 'resume.handlebars',
   outputFilename: 'resume.pdf'
@@ -10,11 +11,14 @@ var paths = {
   dist: 'dist/',
   assets: 'assets/'
 };
+paths.themeDir = [
+  path.join(__dirname, paths.src, 'themes/', settings.theme, '/')
+];
 paths.srcFiles = [
-  paths.src + paths.assets + '**/'
+  paths.themeDir + paths.assets + '**/'
 ];
 paths.templateFiles = [
-  paths.src + '**/(*.handlebars|*.json)'
+  paths.themeDir + '**/(*.handlebars|*.json)'
 ];
 paths.scssFiles = paths.srcFiles.map(function (path) {
   return path + '*.scss';
@@ -25,10 +29,12 @@ paths.imgFiles = paths.srcFiles.map(function (path) {
 paths.jsFiles = paths.srcFiles.map(function (path) {
   return path + '*.js';
 });
+paths.inputData = path.join(__dirname, paths.src, settings.data);
+paths.inputFilename = paths.themeDir + settings.inputFilename;
 
 var handlebarsConfig = {
   ignorePartials: true,
-  batch: [paths.src + 'partials']
+  batch: [paths.themeDir + 'partials']
 };
 
 var sassConfig = {
