@@ -1,0 +1,10 @@
+{{#if skills}}
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+    {{#each skills as |skill|}}
+      <li>{{skill.name}}</li>
+    {{/each}}
+    </ul>
+  </section>
+{{/if}}

@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  &, &::before, &::after {
+    box-sizing: inherit;
+  }
+}
+
+html {
+  box-sizing: border-box;
+  min-height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.75em;
+  line-height: 1.5;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+  margin-bottom: 0.5em;
+}
+
+li {
+  margin-left: 1.5em;
+}
+
+section {
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+}
+
+.header {
+  text-align: center;
+}
+
+.margin-top {
+  margin-top: 0.5em;
+}

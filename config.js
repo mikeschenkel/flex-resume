@@ -1,5 +1,5 @@
 var settings = {
-  theme: 'blank',
+  theme: 'basic',
   data: 'resume.json',
   inputFilename: 'resume.handlebars',
   outputFilename: 'resume.pdf'

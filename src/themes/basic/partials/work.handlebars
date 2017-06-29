@@ -1,0 +1,9 @@
+{{#if work}}
+  <section id="work">
+    <h2>Work</h2>
+    {{#each work}}
+      <strong>{{name}} - {{position}}</strong> | {{startDate}} to {{endDate}}
+      <p>{{summary}}</p>
+    {{/each}}
+  </section>
+{{/if}}
