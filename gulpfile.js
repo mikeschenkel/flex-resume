@@ -1,7 +1,5 @@
-// include depenencies (a-z)
-
+// Include depenencies (A-Z)
 var browserSync = require('browser-sync');
-var config = require(__dirname + '/config.json');
 var data = require('gulp-data');
 var del = require('del');
 var gulp = require('gulp');
@@ -14,92 +12,65 @@ var requireUncached = require('require-uncached');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 
-// configure input, output and processors
+// Shared configuration
+var config = require('./config.js');
+var paths = config.paths;
+var settings = config.settings;
 
-var inputDir = path.join(__dirname, config.inputDir);
-var inputData = config.inputData;
-var inputFilename = config.inputFilename;
-var outputDir = path.join(__dirname, config.outputDir);
-var outputFilename = config.outputFilename;
-var basePath = path.join('file://', __dirname, config.outputDir);
+var inputDir = path.join(__dirname, paths.src);
+var inputData = inputDir + settings.data;
+var inputFilename = inputDir + settings.inputFilename;
 
-// process input and write output to disk
-
+// Process input and write output to disk
 gulp.task('handlebars', function () {
-  return gulp.src(inputDir + inputFilename)
+  return gulp.src(inputFilename)
     .pipe(data(function() {
-      return requireUncached(inputDir + inputData);
+      return requireUncached(inputData);
     }))
-    .pipe(handlebars(null, {
-      ignorePartials: true,
-      batch: [inputDir + 'partials']
-    }))
-    .pipe(htmlmin({
-      removeComments: true,
-      collapseWhitespace: true,
-      preserveLineBreaks: true
-    }))
+    .pipe(handlebars(null, config.handlebars))
+    .pipe(htmlmin(config.htmlmin))
     .pipe(rename('index.html'))
-    .pipe(gulp.dest(outputDir));
+    .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('css', function () {
-  return gulp.src(inputDir + 'assets/scss/**/*.scss')
-    .pipe(sass({
-      includePaths: [inputDir + 'assets/scss/']
-    }).on('error', sass.logError))
-    .pipe(gulp.dest(outputDir + 'css/'))
+  return gulp.src(paths.scssFiles)
+    .pipe(sass(config.sass).on('error', sass.logError))
+    .pipe(gulp.dest(paths.dist))
     .pipe(browserSync.stream());
 });
 
 gulp.task('img', function () {
-  return gulp.src(inputDir + 'assets/img/**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg)')
-    .pipe(gulp.dest(outputDir + 'img/'));
+  return gulp.src(paths.imgFiles)
+    .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('js', function () {
-  return gulp.src(inputDir + 'assets/js/**/*.js')
-    .pipe(gulp.dest(outputDir + 'js/'));
+  return gulp.src(paths.jsFiles)
+    .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('watch', ['handlebars', 'css', 'img', 'js'], function() {
-  watch(inputDir + '**/(*.handlebars|*.json)', function() { gulp.start(['handlebars']); });
-  watch(inputDir + 'assets/**/*.scss', function() { gulp.start(['css']); });
-  watch(inputDir + 'assets/img/**/(*.png|*.jpg|*.jpeg|*.gif|*.svg)', function() { gulp.start(['img']); });
-  watch(inputDir + 'assets/js/**/*.js', function() { gulp.start(['js']); });
-  watch(outputDir + '*.html').on('change', browserSync.reload);
+  watch(paths.templateFiles, function() { gulp.start(['handlebars']); });
+  watch(paths.scssFiles, function() { gulp.start(['css']); });
+  watch(paths.imgFiles, function() { gulp.start(['img']); });
+  watch(paths.jsFiles, function() { gulp.start(['js']); });
+  watch(paths.dist + '*.html').on('change', browserSync.reload);
 });
 
 gulp.task('serve', ['watch'], function() {
   browserSync.init({
-    server: outputDir
+    server: paths.dist
   });
 });
 
 gulp.task('clean', function () {
-  return del(outputDir + '**/*');
+  return del(paths.dist + '**/*');
 });
 
 gulp.task('build', ['handlebars', 'css', 'img', 'js'], function () {
-  return gulp.src(outputDir + 'index.html')
-    .pipe(htmlmin({
-      removeComments: true,
-      collapseWhitespace: true,
-      preserveLineBreaks: true
-    }))
-    .pipe(gulp.dest(outputDir))
-    .pipe(pdf({
-      base: basePath, // Base path that's used to load files (images, css, js) when they aren't referenced using a host
-      format: 'A4',
-      orientation: 'portrait',
-      type: 'pdf',
-      border: {
-        'top': '1cm',
-        'right': '1cm',
-        'bottom': '1cm',
-        'left': '1cm'
-      }
-    }))
-    .pipe(rename(outputFilename))
-    .pipe(gulp.dest(outputDir));
+  return gulp.src(paths.dist + 'index.html')
+    .pipe(pdf(config.pdf))
+    .pipe(rename(settings.outputFilename))
+    .pipe(gulp.dest(paths.dist));
 });
