@@ -35,6 +35,10 @@ var sassConfig = {
   includePaths: [paths.assets + 'css/']
 };
 
+var browserSyncConfig = {
+  server: paths.dist
+};
+
 var htmlminConfig = {
   removeComments: true,
   collapseWhitespace: true,
@@ -56,6 +60,7 @@ var pdfConfig = {
 };
 
 module.exports = {
+  browserSync: browserSyncConfig,
   htmlmin: htmlminConfig,
   pdf: pdfConfig,
   handlebars: handlebarsConfig,

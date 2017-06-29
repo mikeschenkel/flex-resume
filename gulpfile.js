@@ -59,9 +59,7 @@ gulp.task('watch', ['handlebars', 'css', 'img', 'js'], function() {
 });
 
 gulp.task('serve', ['watch'], function() {
-  browserSync.init({
-    server: paths.dist
-  });
+  browserSync.init(config.browserSync);
 });
 
 gulp.task('clean', function () {
