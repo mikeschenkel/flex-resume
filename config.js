@@ -9,6 +9,7 @@ var path = require('path');
 var paths = {
   src: 'src/',
   dist: 'dist/',
+  themes: 'themes/',
   assets: 'assets/'
 };
 paths.themeDir = [
