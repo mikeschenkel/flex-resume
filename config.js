@@ -19,7 +19,8 @@ paths.srcFiles = [
   paths.themeDir + paths.assets + '**/'
 ];
 paths.templateFiles = [
-  paths.themeDir + '**/(*.handlebars|*.json)'
+  path.join(__dirname, paths.src, settings.data),
+  paths.themeDir + '**/(*.handlebars)'
 ];
 paths.scssFiles = paths.srcFiles.map(function (path) {
   return path + '*.scss';
