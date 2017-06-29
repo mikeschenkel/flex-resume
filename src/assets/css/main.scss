@@ -1,27 +1,18 @@
-@import 'normalize';
+* {
+  margin: 0;
+  padding: 0;
+
+  &, &::before, &::after {
+    box-sizing: inherit;
+  }
+}
 
 html {
   box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-html {
   min-height: 100%;
-  overflow-y: scroll;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
+  line-height: 1.5;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-
-h1 {
-  margin: 0;
 }
