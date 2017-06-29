@@ -2,8 +2,8 @@
   "scripts": {
     "start": "gulp clean && gulp serve",
     "build": "gulp clean && gulp build",
-    "themes:new": "node themes-new",
-    "themes:remove": "node themes-remove"
+    "theme:new": "node theme-new",
+    "theme:remove": "node theme-remove"
   },
   "devDependencies": {
     "browser-sync": "2.18.12",
