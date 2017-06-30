@@ -20,7 +20,7 @@ const settings = config.settings;
 
 // Process input and write output to disk
 gulp.task('handlebars', () => {
-  return gulp.src(paths.inputFilename)
+  return gulp.src(paths.inputFile)
     .pipe(data(() => {
       return requireUncached(paths.inputData);
     }))

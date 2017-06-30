@@ -2,8 +2,6 @@
 
 const settings = {
   theme: 'basic',
-  data: 'resume.json',
-  inputFilename: 'resume.handlebars',
   outputFilename: 'resume.pdf'
 };
 
@@ -12,16 +10,18 @@ const paths = {
   src: 'src/',
   dist: 'dist/',
   themes: 'themes/',
-  assets: 'assets/'
+  assets: 'assets/',
+  data: 'resume.json',
+  inputFile: 'resume.handlebars'
 };
 paths.themeDir = [
-  path.join(__dirname, paths.src, 'themes/', settings.theme, '/')
+  path.join(__dirname, paths.src, paths.themes, settings.theme, '/')
 ];
 paths.srcFiles = [
   paths.themeDir + paths.assets + '**/'
 ];
 paths.templateFiles = [
-  path.join(__dirname, paths.src, settings.data),
+  path.join(__dirname, paths.src, paths.data),
   paths.themeDir + '**/(*.handlebars)'
 ];
 paths.scssFiles = paths.srcFiles.map((path) => {
@@ -33,8 +33,8 @@ paths.imgFiles = paths.srcFiles.map((path) => {
 paths.jsFiles = paths.srcFiles.map((path) => {
   return path + '*.js';
 });
-paths.inputData = path.join(__dirname, paths.src, settings.data);
-paths.inputFilename = paths.themeDir + settings.inputFilename;
+paths.inputData = path.join(__dirname, paths.src, paths.data);
+paths.inputFile = paths.themeDir + paths.inputFile;
 
 const handlebarsConfig = {
   ignorePartials: true,
