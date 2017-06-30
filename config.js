@@ -1,12 +1,12 @@
-var settings = {
+const settings = {
   theme: 'basic',
   data: 'resume.json',
   inputFilename: 'resume.handlebars',
   outputFilename: 'resume.pdf'
 };
 
-var path = require('path');
-var paths = {
+const path = require('path');
+const paths = {
   src: 'src/',
   dist: 'dist/',
   themes: 'themes/',
@@ -22,39 +22,39 @@ paths.templateFiles = [
   path.join(__dirname, paths.src, settings.data),
   paths.themeDir + '**/(*.handlebars)'
 ];
-paths.scssFiles = paths.srcFiles.map(function (path) {
+paths.scssFiles = paths.srcFiles.map((path) => {
   return path + '*.scss';
 });
-paths.imgFiles = paths.srcFiles.map(function (path) {
+paths.imgFiles = paths.srcFiles.map((path) => {
   return path + '*(*.png|*.jpg|*.jpeg|*.gif|*.svg)';
 });
-paths.jsFiles = paths.srcFiles.map(function (path) {
+paths.jsFiles = paths.srcFiles.map((path) => {
   return path + '*.js';
 });
 paths.inputData = path.join(__dirname, paths.src, settings.data);
 paths.inputFilename = paths.themeDir + settings.inputFilename;
 
-var handlebarsConfig = {
+const handlebarsConfig = {
   ignorePartials: true,
   batch: [paths.themeDir + 'partials']
 };
 
-var sassConfig = {
+const sassConfig = {
   includePaths: [paths.assets + 'css/']
 };
 
-var browserSyncConfig = {
+const browserSyncConfig = {
   server: paths.dist
 };
 
-var htmlminConfig = {
+const htmlminConfig = {
   removeComments: true,
   collapseWhitespace: true,
   preserveLineBreaks: true
 };
 
-var basePath = path.join('file://', __dirname, paths.dist);
-var pdfConfig = {
+const basePath = path.join('file://', __dirname, paths.dist);
+const pdfConfig = {
   base: basePath,
   format: 'A4',
   orientation: 'portrait',

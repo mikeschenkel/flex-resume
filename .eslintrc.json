@@ -1,0 +1,54 @@
+{
+  "env": {
+    "browser": false,
+    "node": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-console": 0,
+    "prefer-arrow-callback": [
+      "error", {
+        "allowNamedFunctions": true
+      }
+    ],
+    "keyword-spacing": [
+      "error", {
+        "before": true
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always", {
+        "objectsInObjects": false
+      }
+    ],
+    "camelcase": [
+      "error", {
+        "properties": "always"
+      }
+    ],
+    "prefer-const": [
+      "error", {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ]
+  }
+}
