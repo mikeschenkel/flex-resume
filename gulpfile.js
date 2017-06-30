@@ -1,3 +1,5 @@
+'use strict';
+
 // Include depenencies (A-Z)
 const browserSync = require('browser-sync');
 const data = require('gulp-data');

@@ -1,3 +1,5 @@
+'use strict';
+
 const settings = {
   theme: 'basic',
   data: 'resume.json',
