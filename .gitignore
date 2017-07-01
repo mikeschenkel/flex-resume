@@ -7,5 +7,12 @@ npm-debug.log*
 # Dependency directories
 node_modules/
 
+### Code ###
+# Visual Studio Code - https://code.visualstudio.com/
+.settings/
+.vscode/
+tsconfig.json
+jsconfig.json
+
 ### JSON Resume ###
 dist/
