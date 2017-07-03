@@ -16,3 +16,5 @@ jsconfig.json
 
 ### JSON Resume ###
 dist/
+src/themes/*
+!src/themes/basic

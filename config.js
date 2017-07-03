@@ -37,8 +37,8 @@ paths.inputData = path.join(__dirname, paths.src, paths.data);
 paths.inputFile = paths.themeDir + paths.inputFile;
 
 const handlebarsConfig = {
-  ignorePartials: true,
-  batch: [paths.themeDir + 'partials']
+  partials: paths.themeDir + 'partials/**/*(*.handlebars|*.hbs)',
+  helpers: paths.themeDir + 'helpers/**/*.js'
 };
 
 const sassConfig = {

@@ -5,7 +5,7 @@ const browserSync = require('browser-sync');
 const data = require('gulp-data');
 const del = require('del');
 const gulp = require('gulp');
-const handlebars = require('gulp-compile-handlebars');
+const handlebars = require('gulp-hb');
 const htmlmin = require('gulp-htmlmin');
 const pdf = require('gulp-html-pdf');
 const rename = require('gulp-rename');
@@ -24,7 +24,7 @@ gulp.task('handlebars', () => {
     .pipe(data(() => {
       return requireUncached(paths.inputData);
     }))
-    .pipe(handlebars(null, config.handlebars))
+    .pipe(handlebars(config.handlebars))
     .pipe(htmlmin(config.htmlmin))
     .pipe(rename('index.html'))
     .pipe(gulp.dest(paths.dist));
