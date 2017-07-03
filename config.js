@@ -1,7 +1,7 @@
 'use strict';
 
 const settings = {
-  theme: 'basic',
+  theme: 'basicErnst',
   outputFilename: 'resume.pdf'
 };
 
