@@ -2,7 +2,7 @@
   <section id="education">
     <h2>Education</h2>
     {{#each education}}
-      <strong>{{institution}} - {{studyType}} {{area}}</strong> | {{startDate}} to {{endDate}}
+      <strong>{{institution}} - {{studyType}} {{area}}</strong> | {{formatDate startDate}} to {{formatDate endDate}}
 
       {{#if courses}}
       <h3 class="margin-top">Courses</h3>
