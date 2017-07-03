@@ -22,12 +22,12 @@ paths.templateFiles = [
   paths.themeDir + '**/(*.handlebars|*.hbs)'
 ];
 paths.srcFiles = paths.themeDir + paths.assets;
+paths.scssFiles = paths.srcFiles + paths.scss + '**/*.scss';
 paths.assetFiles = [
   paths.srcFiles + '**/*',
   '!' + paths.srcFiles + paths.scss,
   '!' + paths.scssFiles
 ];
-paths.scssFiles = paths.srcFiles + paths.scss + '**/*.scss';
 paths.inputData = path.join(__dirname, paths.src, paths.data);
 paths.inputFile = paths.themeDir + paths.inputFile;
 
