@@ -30,28 +30,22 @@ gulp.task('handlebars', () => {
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('css', () => {
+gulp.task('assets', () => {
+  return gulp.src(paths.assetFiles)
+    .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('scss', () => {
   return gulp.src(paths.scssFiles)
     .pipe(sass(config.sass).on('error', sass.logError))
-    .pipe(gulp.dest(paths.dist))
+    .pipe(gulp.dest(paths.dist + paths.css))
     .pipe(browserSync.stream());
 });
 
-gulp.task('img', () => {
-  return gulp.src(paths.imgFiles)
-    .pipe(gulp.dest(paths.dist));
-});
-
-gulp.task('js', () => {
-  return gulp.src(paths.jsFiles)
-    .pipe(gulp.dest(paths.dist));
-});
-
-gulp.task('watch', ['handlebars', 'css', 'img', 'js'], () => {
+gulp.task('watch', ['handlebars', 'assets', 'scss'], () => {
   watch(paths.templateFiles, () => { gulp.start(['handlebars']); });
-  watch(paths.scssFiles, () => { gulp.start(['css']); });
-  watch(paths.imgFiles, () => { gulp.start(['img']); });
-  watch(paths.jsFiles, () => { gulp.start(['js']); });
+  watch(paths.assetFiles, () => { gulp.start(['assets']); });
+  watch(paths.scssFiles, () => { gulp.start(['scss']); });
   watch(paths.dist + '*.html').on('change', browserSync.reload);
 });
 
@@ -60,10 +54,10 @@ gulp.task('serve', ['watch'], () => {
 });
 
 gulp.task('clean', () => {
-  return del(paths.dist + '**/*');
+  return del(paths.dist);
 });
 
-gulp.task('build', ['handlebars', 'css', 'img', 'js'], () => {
+gulp.task('build', ['handlebars', 'assets', 'scss'], () => {
   return gulp.src(paths.dist + 'index.html')
     .pipe(pdf(config.pdf))
     .pipe(rename(settings.outputFilename))

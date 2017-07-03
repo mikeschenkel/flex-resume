@@ -11,28 +11,23 @@ const paths = {
   dist: 'dist/',
   themes: 'themes/',
   assets: 'assets/',
+  css: 'css/',
+  scss: 'scss/',
   data: 'resume.json',
   inputFile: 'resume.handlebars'
 };
-paths.themeDir = [
-  path.join(__dirname, paths.src, paths.themes, settings.theme, '/')
-];
-paths.srcFiles = [
-  paths.themeDir + paths.assets + '**/'
-];
+paths.themeDir = path.join(__dirname, paths.src, paths.themes, settings.theme, '/');
 paths.templateFiles = [
   path.join(__dirname, paths.src, paths.data),
-  paths.themeDir + '**/(*.handlebars)'
+  paths.themeDir + '**/(*.handlebars|*.hbs)'
 ];
-paths.scssFiles = paths.srcFiles.map((path) => {
-  return path + '*.scss';
-});
-paths.imgFiles = paths.srcFiles.map((path) => {
-  return path + '*(*.png|*.jpg|*.jpeg|*.gif|*.svg)';
-});
-paths.jsFiles = paths.srcFiles.map((path) => {
-  return path + '*.js';
-});
+paths.srcFiles = paths.themeDir + paths.assets;
+paths.assetFiles = [
+  paths.srcFiles + '**/*',
+  '!' + paths.srcFiles + paths.scss,
+  '!' + paths.scssFiles
+];
+paths.scssFiles = paths.srcFiles + paths.scss + '**/*.scss';
 paths.inputData = path.join(__dirname, paths.src, paths.data);
 paths.inputFile = paths.themeDir + paths.inputFile;
 
@@ -42,7 +37,7 @@ const handlebarsConfig = {
 };
 
 const sassConfig = {
-  includePaths: [paths.assets + 'css/']
+  includePaths: [paths.assets + paths.scss]
 };
 
 const browserSyncConfig = {
