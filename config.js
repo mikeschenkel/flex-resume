@@ -1,7 +1,9 @@
 'use strict';
 
-const settings = {
+// User Settings
+const userSettings = {
   theme: 'basic',
+  data: 'resume.json',
   outputFilename: 'resume.pdf'
 };
 
@@ -13,12 +15,11 @@ const paths = {
   assets: 'assets/',
   css: 'css/',
   scss: 'scss/',
-  data: 'resume.json',
   inputFile: 'resume.handlebars'
 };
-paths.themeDir = path.join(__dirname, paths.src, paths.themes, settings.theme, '/');
+paths.themeDir = path.join(__dirname, paths.src, paths.themes, userSettings.theme, '/');
 paths.templateFiles = [
-  path.join(__dirname, paths.src, paths.data),
+  path.join(__dirname, paths.src, userSettings.data),
   paths.themeDir + '**/(*.handlebars|*.hbs)'
 ];
 paths.srcFiles = paths.themeDir + paths.assets;
@@ -28,7 +29,7 @@ paths.assetFiles = [
   '!' + paths.srcFiles + paths.scss,
   '!' + paths.scssFiles
 ];
-paths.inputData = path.join(__dirname, paths.src, paths.data);
+paths.inputData = path.join(__dirname, paths.src, userSettings.data);
 paths.inputFile = paths.themeDir + paths.inputFile;
 
 const handlebarsConfig = {
@@ -71,5 +72,5 @@ module.exports = {
   handlebars: handlebarsConfig,
   sass: sassConfig,
   paths: paths,
-  settings: settings
+  settings: userSettings
 };
