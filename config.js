@@ -11,15 +11,17 @@ const path = require('path');
 const paths = {
   src: 'src/',
   dist: 'dist/',
+  data: 'data/',
   themes: 'themes/',
   assets: 'assets/',
   css: 'css/',
   scss: 'scss/',
   inputFile: 'resume.handlebars'
 };
+paths.dataDir = path.join(__dirname, paths.src, paths.data);
 paths.themeDir = path.join(__dirname, paths.src, paths.themes, userSettings.theme, '/');
 paths.templateFiles = [
-  path.join(__dirname, paths.src, userSettings.data),
+  paths.dataDir + '**/*.json',
   paths.themeDir + '**/(*.handlebars|*.hbs)'
 ];
 paths.srcFiles = paths.themeDir + paths.assets;
@@ -29,7 +31,7 @@ paths.assetFiles = [
   '!' + paths.srcFiles + paths.scss,
   '!' + paths.scssFiles
 ];
-paths.inputData = path.join(__dirname, paths.src, userSettings.data);
+paths.inputData = paths.dataDir + userSettings.data;
 paths.inputFile = paths.themeDir + paths.inputFile;
 
 const handlebarsConfig = {
