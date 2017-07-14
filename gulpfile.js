@@ -58,8 +58,26 @@ gulp.task('clean', () => {
 });
 
 gulp.task('build', ['handlebars', 'assets', 'scss'], () => {
+  function zeroFill(i) {
+    return (i < 10 ? '0' : '') + i;
+  }
+
+  function dateTimeStamp() {
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = zeroFill(currentDate.getMonth() + 1);
+    const year = currentDate.getFullYear();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+
+    return '-'+year+'-'+month+'-'+day+'_'+hours+minutes;
+  }
+
   return gulp.src(paths.dist + 'index.html')
     .pipe(pdf(config.pdf))
-    .pipe(rename(settings.outputFilename))
-    .pipe(gulp.dest(paths.dist));
+    .pipe(rename({
+      basename: settings.outputFilename + dateTimeStamp(),
+      extname: '.pdf'
+    }))
+    .pipe(gulp.dest(settings.outputDestination));
 });

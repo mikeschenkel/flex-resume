@@ -15,6 +15,7 @@ tsconfig.json
 jsconfig.json
 
 ### JSON Resume ###
+_resumes/
 dist/
 src/themes/*
 !src/themes/basic

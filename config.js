@@ -4,7 +4,8 @@
 const userSettings = {
   theme: 'basic',
   data: 'resume.json',
-  outputFilename: 'resume.pdf'
+  outputFilename: 'my-resume',
+  outputDestination: '_resumes/'
 };
 
 const path = require('path');
