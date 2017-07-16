@@ -64,11 +64,11 @@ gulp.task('build', ['handlebars', 'assets', 'scss'], () => {
 
   function dateTimeStamp() {
     const currentDate = new Date();
-    const day = currentDate.getDate();
+    const day = zeroFill(currentDate.getDate());
     const month = zeroFill(currentDate.getMonth() + 1);
     const year = currentDate.getFullYear();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
+    const hours = zeroFill(currentDate.getHours());
+    const minutes = zeroFill(currentDate.getMinutes());
 
     return '-'+year+'-'+month+'-'+day+'_'+hours+minutes;
   }
