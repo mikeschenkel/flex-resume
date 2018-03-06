@@ -2,8 +2,9 @@
   <section id="work">
     <h2>Work</h2>
     {{#each work}}
-      <strong>{{name}} - {{position}}</strong> | {{formatDate startDate}} to {{formatDate endDate}}
-      <p>{{summary}}</p>
+      <strong>{{name}} | {{position}}</strong>
+      <span class="align-right">{{formatDate startDate}} to {{formatDate endDate}}</span>
+      <p class="margin-top">{{summary}}</p>
     {{/each}}
   </section>
 {{/if}}

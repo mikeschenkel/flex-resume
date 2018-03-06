@@ -1,0 +1,10 @@
+{{#if languages}}
+  <section id="languages">
+    <h2>Languages</h2>
+    <ul>
+    {{#each languages as |language|}}
+      <li>{{language.language}} - {{language.fluency}}</li>
+    {{/each}}
+    </ul>
+  </section>
+{{/if}}

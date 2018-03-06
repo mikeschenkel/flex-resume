@@ -1,23 +1,29 @@
 {
   "name": "basic",
-  "version": "0.1.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Basic theme for Flex Resume",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikeschenkel/basic.git"
+    "url": "git+https://github.com/mikeschenkel/basic-resume-theme.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "resume",
+    "cv",
+    "theme",
+    "handlebars",
+    "javascript"
+  ],
+  "author": "Mike Schenkel",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mikeschenkel/basic/issues"
+    "url": "https://github.com/mikeschenkel/basic-resume-theme/issues"
   },
-  "homepage": "https://github.com/mikeschenkel/basic#readme",
+  "homepage": "https://github.com/mikeschenkel/basic-resume-theme#readme",
   "dependencies": {
-    "moment": "2.18.1"
+    "moment": "2.21.0"
   }
 }
