@@ -1,7 +1,7 @@
+# Flex Resume 📝
+
 ![Version](https://img.shields.io/badge/version-1.0-green.svg?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)
-
-# Flex Resume 📝
 
 Make resumes with JSON-data alongside your own markup and styles to easily make resumes completely your way. Just how any developer would like it! 😎
 
@@ -9,9 +9,9 @@ Make resumes with JSON-data alongside your own markup and styles to easily make 
 
 ## Getting Started
 
-    $ git clone https://github.com/mikeschenkel/flex-resume.git
-    $ cd flex-resume
-    $ npm install
+    git clone https://github.com/mikeschenkel/flex-resume.git
+    cd flex-resume
+    npm install
 
 ## Usage
 
@@ -27,17 +27,25 @@ This compiles all necessary files and saves your resume in PDF format inside the
 
 Create a new blank-theme inside the `src/themes/` directory.
 
+**Example:**
+
+    npm run theme:new my-theme
+
 ### `npm run theme:install [gitRepo]`
 
 Install a new theme from any Git repository.
 
 **Example:**
 
-    $ npm run theme:install https://github.com/mikeschenkel/basic-resume-theme.git
+    npm run theme:install https://github.com/mikeschenkel/basic-resume-theme.git
 
 ### `npm run theme:remove [themeName]`
 
 Remove an already installed theme.
+
+**Example:**
+
+    npm run theme:remove basic
 
 ## Settings
 
@@ -61,7 +69,8 @@ Since you’ll want to be swapping different information in and out depending on
 
 ## Changelog
 
-**1.0**
+### 1.0
+
 - Initial release
 
 ## License
