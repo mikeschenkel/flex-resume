@@ -7,8 +7,8 @@
     "theme:install": "node ./lib/theme-install"
   },
   "devDependencies": {
-    "browser-sync": "2.23.6",
-    "chalk": "2.3.2",
+    "browser-sync": "2.24.4",
+    "chalk": "2.4.1",
     "del": "3.0.0",
     "gulp": "3.9.1",
     "gulp-cli": "2.0.1",
@@ -17,7 +17,7 @@
     "gulp-html-pdf": "0.3.0",
     "gulp-htmlmin": "4.0.0",
     "gulp-rename": "1.2.2",
-    "gulp-sass": "3.1.0",
+    "gulp-sass": "4.0.1",
     "gulp-watch": "5.0.0",
     "ncp": "2.0.0",
     "require-uncached": "1.0.3"
