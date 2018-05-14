@@ -1,6 +1,5 @@
 'use strict';
 
-// Include depenencies (A-Z)
 const browserSync = require('browser-sync');
 const data = require('gulp-data');
 const del = require('del');
@@ -11,15 +10,27 @@ const pdf = require('gulp-html-pdf');
 const rename = require('gulp-rename');
 const requireUncached = require('require-uncached');
 const sass = require('gulp-sass');
-const watch = require('gulp-watch');
 
-// Shared configuration
 const config = require('./config.js');
 const paths = config.paths;
 const settings = config.settings;
 
-// Process input and write output to disk
-gulp.task('handlebars', () => {
+function zeroFill(i) {
+  return (i < 10 ? '0' : '') + i;
+}
+
+function dateTimeStamp() {
+  const currentDate = new Date();
+  const day = zeroFill(currentDate.getDate());
+  const month = zeroFill(currentDate.getMonth() + 1);
+  const year = currentDate.getFullYear();
+  const hours = zeroFill(currentDate.getHours());
+  const minutes = zeroFill(currentDate.getMinutes());
+
+  return `-${year}-${month}-${day}_${hours}${minutes}`;
+}
+
+function buildHandlebars() {
   return gulp.src(paths.inputFile)
     .pipe(data(() => {
       return requireUncached(paths.inputData);
@@ -28,51 +39,42 @@ gulp.task('handlebars', () => {
     .pipe(htmlmin(config.htmlmin))
     .pipe(rename('index.html'))
     .pipe(gulp.dest(paths.dist));
-});
+}
+exports.buildHandlebars = buildHandlebars;
 
-gulp.task('assets', () => {
+function moveAssets() {
   return gulp.src(paths.assetFiles)
     .pipe(gulp.dest(paths.dist));
-});
+}
+exports.moveAssets = moveAssets;
 
-gulp.task('scss', () => {
+function buildStyles() {
   return gulp.src(paths.scssFiles)
     .pipe(sass(config.sass).on('error', sass.logError))
     .pipe(gulp.dest(paths.dist + paths.css))
     .pipe(browserSync.stream());
-});
+}
+exports.buildStyles = buildStyles;
 
-gulp.task('watch', ['handlebars', 'assets', 'scss'], () => {
-  watch(paths.templateFiles, () => { gulp.start(['handlebars']); });
-  watch(paths.assetFiles, () => { gulp.start(['assets']); });
-  watch(paths.scssFiles, () => { gulp.start(['scss']); });
-  watch(paths.dist + '*.html').on('change', browserSync.reload);
-});
+function watch() {
+  gulp.watch(paths.templateFiles, buildHandlebars);
+  gulp.watch(paths.assetFiles, moveAssets);
+  gulp.watch(paths.scssFiles, buildStyles);
+  gulp.watch(paths.dist + '*.html').on('all', browserSync.reload);
+}
+exports.watch = watch;
 
-gulp.task('serve', ['watch'], () => {
+function serve() {
   browserSync.init(config.browserSync);
-});
+}
+exports.serve = serve;
 
-gulp.task('clean', () => {
+function clean() {
   return del(paths.dist);
-});
+}
+exports.clean = clean;
 
-gulp.task('build', ['handlebars', 'assets', 'scss'], () => {
-  function zeroFill(i) {
-    return (i < 10 ? '0' : '') + i;
-  }
-
-  function dateTimeStamp() {
-    const currentDate = new Date();
-    const day = zeroFill(currentDate.getDate());
-    const month = zeroFill(currentDate.getMonth() + 1);
-    const year = currentDate.getFullYear();
-    const hours = zeroFill(currentDate.getHours());
-    const minutes = zeroFill(currentDate.getMinutes());
-
-    return '-'+year+'-'+month+'-'+day+'_'+hours+minutes;
-  }
-
+function buildPDF() {
   return gulp.src(paths.dist + 'index.html')
     .pipe(pdf(config.pdf))
     .pipe(rename({
@@ -80,4 +82,11 @@ gulp.task('build', ['handlebars', 'assets', 'scss'], () => {
       extname: '.pdf'
     }))
     .pipe(gulp.dest(settings.outputDestination));
-});
+}
+exports.buildPDF = buildPDF;
+
+const build = gulp.series(clean, gulp.parallel(buildHandlebars, buildStyles, moveAssets));
+const dev = gulp.series(build, gulp.parallel(serve, watch));
+
+gulp.task('dev', dev);
+gulp.task('build', build);

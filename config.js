@@ -29,7 +29,7 @@ paths.srcFiles = paths.themeDir + paths.assets;
 paths.scssFiles = paths.srcFiles + paths.scss + '**/*.scss';
 paths.assetFiles = [
   paths.srcFiles + '**/*',
-  '!' + paths.srcFiles + paths.scss,
+  '!' + paths.srcFiles + 'scss',
   '!' + paths.scssFiles
 ];
 paths.inputData = paths.dataDir + userSettings.data;
