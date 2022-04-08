@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/mikeschenkel/basic-resume-theme#readme",
   "dependencies": {
-    "moment": "2.21.0"
+    "moment": "2.29.2"
   }
 }
